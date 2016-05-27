@@ -2,24 +2,35 @@
 
 namespace App\Routes;
 
+use App\Model\Model;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 class Routes {
+	
+	private $pdo;
+	
+	function __construct(){
+		$this->pdo = new Model();		
+	}
 
 	public function load($app){
+		
 		$app->get('/api/v1/phones', function(){
-
-			$resalt = '<h2>List of all Phones</h2>
-			<ul>
-			<li>One</li>
-			<li>Two</li>
-			<li>Three</li>
-			</ul>';
 			
-			return $resalt;
+			return $this->pdo->getAll('phones');
+		});
+		
+		$app->get('/api/v1/phones/list', function(){
+			
+			return new Response('Hello from response', 200);
 		});
 		
 		$app->get('/api/v1/phones/{id}', function($id){
-		return 'phone/'.(int) $id;
+			return 'phones/'.(int) $id;
 		});
+		
+		
 	}
 
 }
