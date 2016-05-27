@@ -20,7 +20,7 @@ class Model {
 			$result[result][] = $row;
 		}
 
-		return json_encode($resalt);
+		return json_encode($result);
 	}
 	
 	function getById($tableName, $id) {
@@ -28,7 +28,7 @@ class Model {
 		$query = $this->pdo->query("SELECT * FROM ".$tableName." WHERE id = ".$id);
 		
 		if ($result = $query->fetch(\PDO::FETCH_ASSOC)) {	
-			return '{"massege":"result find", "resalt": ' .json_encode($resalt). '}';	
+			return '{"massege":"result find", "resalt": ' .json_encode($result). '}';	
 		} else {
 			return '{"massege":"no result find"}';
 		}
