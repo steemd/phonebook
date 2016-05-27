@@ -33,6 +33,18 @@ class Routes {
 		$app->get('/api/v1/phones/{id}', function($id){
 			return new Response($this->model->getById('phones', $id), 200, array('Content-Type'=>'text/json'));
 		});
+		
+		$app->error(function (\Exception $e, $code) {
+			switch ($code) {
+				case 404:
+					$message = 'The requested page could not be found.';
+					break;
+				default:
+					$message = 'We are sorry, but something went terribly wrong.';
+			}
+
+			return new Response($message);
+		});
 	
 	}
 
