@@ -12,15 +12,27 @@ class Model {
 	
 	function getAll($tableName){
 		
-		$resalt = 'List of '.$tableName;
+		$result = array('massege'=>'result find');
 		
-		$resalt .= '<ul>';
-		foreach ($this->pdo->query("SELECT * FROM ".$tableName) as $row) {
-			$resalt .= '<li> ID - '.$row[id].'; Name - '.$row[name].'</li>';
+		$query = $this->pdo->query("SELECT * FROM ".$tableName);
+		
+		while($row = $query->fetch(\PDO::FETCH_ASSOC)) {
+			$result[result][] = $row;
 		}
-		$resalt .= '</ul>';
+
+		return json_encode($resalt);
+	}
+	
+	function getById($tableName, $id) {
 		
-		return $resalt;
+		$query = $this->pdo->query("SELECT * FROM ".$tableName." WHERE id = ".$id);
+		
+		if ($result = $query->fetch(\PDO::FETCH_ASSOC)) {	
+			return '{"massege":"result find", "resalt": ' .json_encode($resalt). '}';	
+		} else {
+			return '{"massege":"no result find"}';
+		}
+		
 	}
 	
 }

@@ -8,29 +8,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Routes {
 	
-	private $pdo;
+	private $model;
 	
 	function __construct(){
-		$this->pdo = new Model();		
+		$this->model = new Model();		
 	}
 
 	public function load($app){
 		
-		$app->get('/api/v1/phones', function(){
-			
-			return $this->pdo->getAll('phones');
-		});
-		
-		$app->get('/api/v1/phones/list', function(){
-			
-			return new Response('Hello from response', 200);
+		$app->get('/api/v1/phones', function(){	
+			return $this->model->getAll('phones');
 		});
 		
 		$app->get('/api/v1/phones/{id}', function($id){
-			return 'phones/'.(int) $id;
+			return $this->model->getById('phones', $id);
 		});
-		
-		
+	
 	}
 
 }
