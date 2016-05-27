@@ -16,12 +16,22 @@ class Routes {
 
 	public function load($app){
 		
+		$app->get('/', function(){
+			
+			ob_start();
+			include __DIR__.'/../../src/Phonebook/Views/index.html.php';
+			$resalt = ob_get_contents();
+			ob_clean();
+			
+			return $resalt;
+		});
+		
 		$app->get('/api/v1/phones', function(){	
-			return $this->model->getAll('phones');
+			return new Response($this->model->getAll('phones'), 200, array('Content-Type'=>'text/json'));
 		});
 		
 		$app->get('/api/v1/phones/{id}', function($id){
-			return $this->model->getById('phones', $id);
+			return new Response($this->model->getById('phones', $id), 200, array('Content-Type'=>'text/json'));
 		});
 	
 	}
