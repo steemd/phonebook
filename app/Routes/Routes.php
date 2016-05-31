@@ -26,13 +26,28 @@ class Routes {
 			return new Response($result, 200);
 		});
 		
-		$app->get('/admin', function(){	
-			$render = new Renderer('admin.html');
-			$result = $render->getContent();
-						
-			return new Response($result, 200);
+		$app->get('/admin', function(){
+					$render = new Renderer('admin.html');
+					$result = $render->getContent();
+					
+					return new Response($result, 200);
 		});
 		
+		$app->post('/admin', function(){
+			if (isset($_POST[login]) && isset($_POST[pass])) {
+				if($_POST[login] == 'admin' && $_POST[pass] == 'admin') {
+					$render = new Renderer('phones.html');
+					$result = $render->getContent();
+					
+					return new Response($result, 200);
+				}
+			}
+				$render = new Renderer('admin.html');
+				$result = $render->getContent();
+						
+				return new Response($result, 200);
+			
+		});
 
 		// REST API
 		$app->get('/api/v1/phones', function(){	
