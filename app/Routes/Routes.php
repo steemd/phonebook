@@ -3,6 +3,7 @@
 namespace App\Routes;
 
 use App\Model\Model;
+use App\Renderer\Renderer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,16 +17,24 @@ class Routes {
 
 	public function load($app){
 		
+		// Front-end
 		$app->get('/', function(){
 			
-			ob_start();
-			include __DIR__.'/../../src/Phonebook/Views/index.html.php';
-			$resalt = ob_get_contents();
-			ob_clean();
-			
-			return $resalt;
+			$render = new Renderer('index.html');
+			$result = $render->getContent();
+						
+			return new Response($result, 200);
 		});
 		
+		$app->get('/admin', function(){	
+			$render = new Renderer('admin.html');
+			$result = $render->getContent();
+						
+			return new Response($result, 200);
+		});
+		
+
+		// REST API
 		$app->get('/api/v1/phones', function(){	
 			return new Response($this->model->getAll('phones'), 200, array('Content-Type'=>'text/json'));
 		});
@@ -34,6 +43,13 @@ class Routes {
 			return new Response($this->model->getById('phones', $id), 200, array('Content-Type'=>'text/json'));
 		});
 		
+		$app->post('/api/v1/phones', function(){
+			$resalt = $this->model->save('phones', $_POST);
+			
+			return $resalt;
+		});
+		
+		// Error Page
 		$app->error(function (\Exception $e, $code) {
 			switch ($code) {
 				case 404:
