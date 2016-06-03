@@ -3,11 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Phonebook v1</title>
-	<link rel="stylesheet" href="/www/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/www/css/style.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<div class="container">
+	<div class="row">
+	<div class="col-md-6 col-md-offset-3">
 	<div class="wrapper">
 		<h1>Admin Panel</h1>
 		<form method="POST">
@@ -22,6 +24,8 @@
 
 			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
+	</div>
+	</div>
 	</div>
 	</div>
 </body>

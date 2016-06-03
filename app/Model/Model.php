@@ -10,7 +10,9 @@ class Model {
 		$this->pdo = new \PDO('sqlite:./../config/phonebook.db');
 	}
 	
-	function getAll($tableName){
+	function findAll(){
+		$tableName = $this->getTableName();
+		
 		$result = array('massege'=>'result find');
 		$query = $this->pdo->query("SELECT * FROM ".$tableName);
 		
@@ -20,7 +22,10 @@ class Model {
 		return json_encode($result);
 	}
 	
-	function getById($tableName, $id) {
+	function findById($id) {
+		$tableName = $this->getTableName();
+		$id = (int) $id;
+		
 		$query = $this->pdo->query("SELECT * FROM ".$tableName." WHERE id = ".$id);
 		
 		if ($result = $query->fetch(\PDO::FETCH_ASSOC)) {	
@@ -28,22 +33,50 @@ class Model {
 		} else {
 			return '{"massege":"no result find"}';
 		}
-		
 	}
 	
-	function save($tableName, $data){
-		$stmt = $this->pdo->prepare("INSERT INTO phones(name, position, inner_phone, outer_phone, auditory, email, category_id) VALUES (:name, :position, :inner_phone, :outer_phone, :auditory, :email, :category_id)");
+	function save($data){
+		$tableName = $this->getTableName();
+		$vars = get_object_vars($this);
 		
-		$stmt->bindParam(':name', $data[name], \PDO::PARAM_STR);
-		$stmt->bindParam(':position', $data[position], \PDO::PARAM_STR);
-		$stmt->bindParam(':inner_phone', $data[inner_phone], \PDO::PARAM_STR);
-		$stmt->bindParam(':outer_phone', $data[outer_phone], \PDO::PARAM_STR);
-		$stmt->bindParam(':auditory', $data[auditory], \PDO::PARAM_STR);
-		$stmt->bindParam(':email', $data[email], \PDO::PARAM_STR);
-		$stmt->bindParam(':category_id',  $data[category_id], \PDO::PARAM_INT);
+		$attrString = $this->getAttrString($vars, array('', ', '));
+		$propString = $this->getAttrString($vars, array(':', ', '));
 		
+		$correctVars = $this->getCorrectVars($vars);
+
+		$stmt = $this->pdo->prepare("INSERT INTO $tableName ($attrString) VALUES ($propString)");
+		foreach ($correctVars as $key=>$val) {
+			$stmt->bindParam(':'.$key, $data[$key]);
+		}
 		$stmt->execute();
+		
 		return 'information saved';
+	}
+
+	
+	private function getAttrString($arr, $separators) {
+		$result = '';
+		foreach ($arr as $key=>$val) {
+			if (empty($val)){
+				if ($result == '') {
+					$result .= $separators[0].''.$key;
+				} else {
+					$result .= $separators[1].''.$separators[0].''.$key;
+				}
+			}	
+		}
+		return $result;
+	}
+	
+	private function getCorrectVars($vars) {
+		$result = array();
+		foreach ($vars as $key=>$val) {
+			if (empty($val)){
+				$result[$key] = $val;
+			}
+		}
+		
+		return $result;
 	}
 	
 }

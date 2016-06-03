@@ -4,62 +4,38 @@ namespace App\Routes;
 
 use App\Model\Model;
 use App\Renderer\Renderer;
+use Phonebook\Model\Phone;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class Routes {
-	
-	private $model;
-	
-	function __construct(){
-		$this->model = new Model();		
+
+	function __construct(){	
 	}
 
 	public function load($app){
 		
 		// Front-end
-		$app->get('/', function(){
-			
-			$render = new Renderer('index.html');
-			$result = $render->getContent();
-						
-			return new Response($result, 200);
-		});
+		$app->get('/', 'Phonebook\\Controller\\PhoneController::indexAction');
 		
-		$app->get('/admin', function(){
-					$render = new Renderer('admin.html');
-					$result = $render->getContent();
-					
-					return new Response($result, 200);
-		});
+		$app->get('/admin', 'Phonebook\\Controller\\SecurityController::loginAction');
 		
-		$app->post('/admin', function(){
-			if (isset($_POST[login]) && isset($_POST[pass])) {
-				if($_POST[login] == 'admin' && $_POST[pass] == 'admin') {
-					$render = new Renderer('phones.html');
-					$result = $render->getContent();
-					
-					return new Response($result, 200);
-				}
-			}
-				$render = new Renderer('admin.html');
-				$result = $render->getContent();
-						
-				return new Response($result, 200);
-			
-		});
+		$app->post('/admin', 'Phonebook\\Controller\\PhoneController::addAction');
 
 		// REST API
 		$app->get('/api/v1/phones', function(){	
-			return new Response($this->model->getAll('phones'), 200, array('Content-Type'=>'text/json'));
+			$phones = new Phone();
+			return new Response($phones->findAll(), 200, array('Content-Type'=>'text/json'));
 		});
 		
 		$app->get('/api/v1/phones/{id}', function($id){
-			return new Response($this->model->getById('phones', $id), 200, array('Content-Type'=>'text/json'));
+			$phone = new Phone();
+			return new Response($phone->findById($id), 200, array('Content-Type'=>'text/json'));
 		});
 		
 		$app->post('/api/v1/phones', function(){
-			$resalt = $this->model->save('phones', $_POST);
+			$phones = new Phone();
+			$resalt = $phones->save($_POST);
 			
 			return $resalt;
 		});
