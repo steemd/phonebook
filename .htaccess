@@ -1,7 +1,5 @@
 Options -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ www/index.php [QSA,L]
 </IfModule>

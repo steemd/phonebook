@@ -12,20 +12,17 @@ body {
 	o-transition: all .5s;
 	transition: all .5s;
 }
-
+.item{
+	border: 1px solid #f1f1f1;
+	margin-top: 10px;
+	padding: 20px 10px;
+	
+}
+.item:hover {
+	background-color: #f1f1f1;
+}
 .information {
 	padding: 15px;
 	margin: 10px 0;
 	display: none;
-}
-.row.item {
-	background-color: #fff;
-	padding: 15px 0;
-	margin-top: 20px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-	cursor: pointer;
-}
-
-.row.item:hover {
-	background-color: #f1f1f1;
 }
