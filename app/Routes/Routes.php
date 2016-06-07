@@ -23,22 +23,11 @@ class Routes {
 		$app->post('/admin', 'Phonebook\\Controller\\PhoneController::addAction');
 
 		// REST API
-		$app->get('/api/v1/phones', function(){	
-			$phones = new Phone();
-			return new Response($phones->findAll(), 200, array('Content-Type'=>'text/json'));
-		});
+		$app->get('/api/v1/phones', 'Phonebook\\Controller\\RestController::getPhonesAction');
 		
-		$app->get('/api/v1/phones/{id}', function($id){
-			$phone = new Phone();
-			return new Response($phone->findById($id), 200, array('Content-Type'=>'text/json'));
-		});
+		$app->get('/api/v1/phones/{id}', 'Phonebook\\Controller\\RestController::getPhonesOneAction');
 		
-		$app->post('/api/v1/phones', function(){
-			$phones = new Phone();
-			$resalt = $phones->save($_POST);
-			
-			return $resalt;
-		});
+		$app->post('/api/v1/phones', 'Phonebook\\Controller\\RestController::addPhonesAction');
 		
 		// Error Page
 		$app->error(function (\Exception $e, $code) {
