@@ -1,5 +1,6 @@
 Options -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteRule ^(.*)$ www/index.php [QSA,L]
+	RewriteBase /www/
+    RewriteRule ^(.*)$ /www/index.php [QSA,L]
 </IfModule>
