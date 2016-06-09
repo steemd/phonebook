@@ -4,17 +4,20 @@ namespace App\Model;
 
 class Model {
 	
-	private $pdo;
-	
-	function __construct(){
-		$this->pdo = new \PDO('sqlite:./../config/phonebook.db');
+	private static $pdo;
+
+	protected static function getPDO() {
+		if(empty(self::$pdo)) {
+			self::$pdo = new \PDO('sqlite:./../config/phonebook.db');
+		} 
+		return self::$pdo;
 	}
 	
 	function findAll(){
 		$tableName = $this->getTableName();
 		
 		$result = array('massege'=>'result find');
-		$query = $this->pdo->query("SELECT * FROM ".$tableName);
+		$query = Model::getPDO()->query("SELECT * FROM ".$tableName);
 		
 		while($row = $query->fetch(\PDO::FETCH_ASSOC)) {
 			$result[result][] = $row;
@@ -26,7 +29,7 @@ class Model {
 		$tableName = $this->getTableName();
 		$id = (int) $id;
 		
-		$query = $this->pdo->query("SELECT * FROM ".$tableName." WHERE id = ".$id);
+		$query = Model::getPDO()->query("SELECT * FROM ".$tableName." WHERE id = ".$id);
 		
 		if ($result = $query->fetch(\PDO::FETCH_ASSOC)) {	
 			return '{"massege":"result find", "resalt": ' .json_encode($result). '}';	
@@ -39,12 +42,16 @@ class Model {
 		$tableName = $this->getTableName();
 		$vars = get_object_vars($this);
 		
+		echo '<pre>';
+		print_r($vars);
+		echo '</pre>';
+		
 		$attrString = $this->getAttrString($vars, array('', ', '));
 		$propString = $this->getAttrString($vars, array(':', ', '));
 		
 		$correctVars = $this->getCorrectVars($vars);
 
-		$stmt = $this->pdo->prepare("INSERT INTO $tableName ($attrString) VALUES ($propString)");
+		$stmt = Model::getPDO()->prepare("INSERT INTO $tableName ($attrString) VALUES ($propString)");
 		foreach ($correctVars as $key=>$val) {
 			$stmt->bindParam(':'.$key, $data[$key]);
 		}
@@ -52,7 +59,6 @@ class Model {
 		
 		return 'information saved';
 	}
-
 	
 	private function getAttrString($arr, $separators) {
 		$result = '';
