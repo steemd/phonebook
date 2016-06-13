@@ -2,13 +2,15 @@
 
 namespace App\Model;
 
+use App\DI\Service;
+
 class Model {
 	
 	private static $pdo;
 
 	protected static function getPDO() {
 		if(empty(self::$pdo)) {
-			self::$pdo = new \PDO('sqlite:./../config/phonebook.db');
+			self::$pdo = new \PDO(Service::get('config')['pdo']);
 		} 
 		return self::$pdo;
 	}
