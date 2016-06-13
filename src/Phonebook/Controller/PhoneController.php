@@ -16,7 +16,7 @@ class PhoneController extends Controller{
 		$this->app = new App();
 	}
 
-	function indexAction(){	
+	function indexAction(){
 		return $this->render('index.html');
 	}
 	

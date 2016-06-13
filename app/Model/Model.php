@@ -38,51 +38,36 @@ class Model {
 		}
 	}
 	
-	function save($data){
+	function save(){
 		$tableName = $this->getTableName();
 		$vars = get_object_vars($this);
-		
-		echo '<pre>';
-		print_r($vars);
-		echo '</pre>';
-		
-		$attrString = $this->getAttrString($vars, array('', ', '));
-		$propString = $this->getAttrString($vars, array(':', ', '));
-		
-		$correctVars = $this->getCorrectVars($vars);
+		$varsData = array();
 
-		$stmt = Model::getPDO()->prepare("INSERT INTO $tableName ($attrString) VALUES ($propString)");
-		foreach ($correctVars as $key=>$val) {
-			$stmt->bindParam(':'.$key, $data[$key]);
+		$queryString = $this->getQueryString($vars, $tableName);
+
+		$stmt = Model::getPDO()->prepare($queryString);
+
+		foreach ($vars as $key=>$val) {
+			$varsData[':'.$key] = $val ? $val : '';
 		}
-		$stmt->execute();
+		$stmt->execute($varsData);
 		
 		return 'information saved';
 	}
 	
-	private function getAttrString($arr, $separators) {
-		$result = '';
-		foreach ($arr as $key=>$val) {
-			if (empty($val)){
-				if ($result == '') {
-					$result .= $separators[0].''.$key;
-				} else {
-					$result .= $separators[1].''.$separators[0].''.$key;
-				}
-			}	
-		}
-		return $result;
-	}
-	
-	private function getCorrectVars($vars) {
-		$result = array();
+	private function getQueryString($vars, $tableName) {
+		$valString = '';
+
 		foreach ($vars as $key=>$val) {
-			if (empty($val)){
-				$result[$key] = $val;
+			if ($valString == '') {
+				$valString .= ':'.$key;
+			} else {
+				$valString .= ', :'.$key;
 			}
 		}
+		$attrString = str_replace(':', '', $valString);
 		
-		return $result;
+		return 'INSERT INTO '.$tableName.' ('.$attrString.') VALUES ('.$valString.')';
 	}
-	
+
 }

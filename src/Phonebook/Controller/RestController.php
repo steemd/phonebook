@@ -20,9 +20,18 @@ class RestController extends Controller{
 	}
 	
 	function addPhonesAction() {
-		$phones = new Phone();
-		$resalt = $phones->save($_POST);
+		
+		$phone = new Phone();
+
+		$phone->name = $_POST['name'];
+		$phone->position = $_POST['position'];
+		$phone->inner_phone = $_POST['inner_phone'];
+		$phone->outer_phone = $_POST['outer_phone'];
+		$phone->email = $_POST['email'];
+		$phone->category_id = $_POST['category_id'];
+
+		$result = $phone->save();
 			
-		return $resalt;
+		return $result;
 	}
 }
