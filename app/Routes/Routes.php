@@ -5,18 +5,19 @@ namespace App\Routes;
 use App\Model\Model;
 use App\Renderer\Renderer;
 use Phonebook\Model\Phone;
+use App\Security\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class Routes {
 
-	function __construct(){	
+	function __construct(){
 	}
 
 	public function load($app){
-		
+
 		include __DIR__.'/../../config/routes.php';
-		
+
 		// Error Page
 		$app->error(function (\Exception $e, $code) {
 			switch ($code) {
@@ -29,7 +30,7 @@ class Routes {
 
 			return new Response($message);
 		});
-	
+
 	}
 
 }

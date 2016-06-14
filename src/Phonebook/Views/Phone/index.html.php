@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<div class="col-md-2">
-				<a href="admin" class="btn btn-primary pull-right">Admin panel</a>
+				<a href="login" class="btn btn-primary pull-right">Admin panel</a>
 			</div>
 		</div>
 		<div class="item-title">

@@ -1,6 +1,9 @@
 <div class="container">
 <div class="wrapper">
-	<h1>Admin Panel - Phones</h1>
+	<div class="row">
+		<div class="col-md-6"><b>Admin Panel - Phones</b>	</div>
+		<div class="col-md-6"><a href="logout" class="btn btn-primary pull-right">Logout</a></div>
+	</div>
 	<div id="result" class="bg-success information"></div>
 	<form id="create-phone">
 		<div class="form-group">
