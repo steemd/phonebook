@@ -54,6 +54,13 @@
 			});
 			
 		}
+
+		function toggleInfo(btn, block) {
+			$(btn).click(function() {
+				$(block).toggleClass('hidden');
+			});
+			return false;
+		}
 		
 		
 		$(window).on('load', function(){
@@ -71,6 +78,9 @@
 				}
 			});
 		});
+
+		toggleInfo('.search-btn', '.search-block');
+		toggleInfo('.category-btn', '.category-block');
 		
 		searchForm('#search-name', '.name-item');
 		searchForm('#search-position', '.position-item');

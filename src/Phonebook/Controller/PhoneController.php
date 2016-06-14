@@ -10,8 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PhoneController extends Controller{
 
-	function indexAction(){
+	function indexAction() {
 		return $this->render('index.html');
+	}
+
+	function adminAction() {
+		return $this->render('admin.html');
 	}
 
 	function addAction() {
