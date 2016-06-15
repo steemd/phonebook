@@ -40,6 +40,14 @@ class Model {
 		}
 	}
 	
+	function remove($id) {
+		$tableName = $this->getTableName();
+		
+		Model::getPDO()->exec("DELETE FROM $tableName WHERE id = $id");
+		
+		return 'Information delete';
+	}
+	
 	function save(){
 		$tableName = $this->getTableName();
 		$vars = get_object_vars($this);
@@ -52,9 +60,10 @@ class Model {
 		foreach ($vars as $key=>$val) {
 			$varsData[':'.$key] = $val ? $val : '';
 		}
-		$stmt->execute($varsData);
-		
-		return 'information saved';
+		if ($stmt->execute($varsData)) {
+			return 'information saved';
+		}
+			return 'Error :(';
 	}
 	
 	private function getQueryString($vars, $tableName) {

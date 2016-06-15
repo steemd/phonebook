@@ -2,7 +2,17 @@
 // Front-end
 $app->get('/', 'Phonebook\\Controller\\PhoneController::indexAction');
 
-$app->get('/add', 'Phonebook\\Controller\\PhoneController::addAction')
+$app->get('/admin', 'Phonebook\\Controller\\PhoneController::adminAction')
+->before(function() {
+  return App\Security\Security::varifyRoute();
+});
+
+$app->get('/admin/phone/list', 'Phonebook\\Controller\\PhoneController::listAction')
+->before(function() {
+  return App\Security\Security::varifyRoute();
+});
+
+$app->get('/admin/phone/add', 'Phonebook\\Controller\\PhoneController::addAction')
 ->before(function() {
   return App\Security\Security::varifyRoute();
 });
@@ -17,4 +27,12 @@ $app->get('/api/v1/phones', 'Phonebook\\Controller\\RestController::getPhonesAct
 
 $app->get('/api/v1/phones/{id}', 'Phonebook\\Controller\\RestController::getPhonesOneAction');
 
-$app->post('/api/v1/phones', 'Phonebook\\Controller\\RestController::addPhonesAction');
+$app->post('/api/v1/phones', 'Phonebook\\Controller\\RestController::addPhonesAction')
+->before(function() {
+  return App\Security\Security::varifyRoute();
+});
+
+$app->delete('/api/v1/phones/{id}', 'Phonebook\\Controller\\RestController::removePhonesAction')
+->before(function() {
+  return App\Security\Security::varifyRoute();
+});

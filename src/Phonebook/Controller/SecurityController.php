@@ -12,13 +12,13 @@ class SecurityController extends Controller{
 
 	function loginAction() {
 		if (Security::varifyUser()) {
-			return Service::get('app')->redirect('add');
+			return Service::get('app')->redirect('/admin');
 		}
 		return $this->render('login.html');
 	}
 
 	function logoutAction() {
 		session_destroy();
-		return Service::get('app')->redirect('/www');
+		return Service::get('app')->redirect('/');
 	}
 }

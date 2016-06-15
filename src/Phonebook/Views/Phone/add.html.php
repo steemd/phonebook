@@ -2,15 +2,17 @@
 	<div class="header">
 		<div class="row">
 			<div class="col-md-6">
-				<b>Admin Panel - Phones</b>
-				<a href="/www" class="btn btn-primary">Site</a>
+				<a href="/" class="btn btn-primary"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Phonebook</a> - 
+				<a href="/admin" class="btn btn-primary">Admin Panel</a> - 
+				<b>Add Phone</b>
 			</div>
 			<div class="col-md-6">
-				<a href="logout" class="btn btn-primary pull-right">Logout</a>
+				<a href="/logout" class="btn btn-primary pull-right">Logout</a>
 			</div>
 		</div>
 	</div>
 	<div class="container">
+		<h1>Add Phone:</h1>
 		<div id="result" class="bg-success information"></div>
 		<form id="create-phone">
 			<div class="form-group">
@@ -51,6 +53,4 @@
 	</div>
 </div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/script.js"></script>
+<script src="/www/js/script.js"></script>

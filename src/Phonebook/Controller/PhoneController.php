@@ -18,6 +18,10 @@ class PhoneController extends Controller{
 		return $this->render('admin.html');
 	}
 
+	function listAction() {
+		return $this->render('list.html');
+	}
+	
 	function addAction() {
 		return $this->render('add.html');
 	}

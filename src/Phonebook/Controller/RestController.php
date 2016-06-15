@@ -19,19 +19,21 @@ class RestController extends Controller{
 		return new Response($phone->findById($id), 200, array('Content-Type'=>'text/json'));
 	}
 	
-	function addPhonesAction() {
-		
+	function addPhonesAction() {	
 		$phone = new Phone();
-
 		$phone->name = $_POST['name'];
 		$phone->position = $_POST['position'];
 		$phone->inner_phone = $_POST['inner_phone'];
 		$phone->outer_phone = $_POST['outer_phone'];
 		$phone->email = $_POST['email'];
 		$phone->category_id = $_POST['category_id'];
-
-		$result = $phone->save();
-			
-		return $result;
+		$result = $phone->save();		
+		return new Response($result);
+	}
+	
+	function removePhonesAction($id) {
+		$phone = new Phone();
+		$result = $phone->remove((int) $id);
+		return new Response($result);
 	}
 }

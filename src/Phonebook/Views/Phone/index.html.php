@@ -2,10 +2,10 @@
 	<div class="header">
 		<div class="row">
 			<div class="col-md-6">
-				<a href="/www" class="btn"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> <b>Phonebook</b></a>
+				<a href="/" class="btn"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Phonebook</a>
 			</div>
 			<div class="col-md-6">
-				<a href="login" class="btn btn-primary pull-right">Admin panel</a>
+				<a href="/admin" class="btn btn-primary pull-right">Admin panel</a>
 				<a href="#" class="btn search-btn pull-right"><span class="glyphicon glyphicon-search"></span> Search form</a>
 				<a href="#" class="btn category-btn pull-right"><span class="glyphicon glyphicon-th-list"></span> Categories</a>
 				<a href="#" class="btn page-btn pull-right"><span class="glyphicon glyphicon-info-sign"></span> Information</a>
@@ -84,4 +84,4 @@
 	</div>
 </div>
 
-<script src="js/script.js"></script>
+<script src="/www/js/script.js"></script>
