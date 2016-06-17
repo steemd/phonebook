@@ -16,8 +16,8 @@ class Routes {
 
 	public function load($app){
 
-		include __DIR__.'/../../config/routes.php';
-
+		$this->generateRoures(include __DIR__.'/../../config/routes.php', $app);
+		
 		// Error Page
 		$app->error(function (\Exception $e, $code) {
 			switch ($code) {
@@ -27,10 +27,20 @@ class Routes {
 				default:
 					$message = 'We are sorry, but something went terribly wrong.';
 			}
-
 			return new Response($message);
 		});
-
+	}
+	
+	private function generateRoures($routes, $app) {
+		foreach ($routes as $route) {
+			$app->match($route['url'], $route['controller'])
+			->method($route['method'])
+			->before(function() use ($route) {
+				if ($route['role'] == 'admin'){
+					return Security::varifyRoute();
+				}
+			});
+		}
 	}
 
 }
