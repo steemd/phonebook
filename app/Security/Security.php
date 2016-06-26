@@ -8,7 +8,7 @@ class Security {
 
   public static function varifyRoute(){
     if (!self::varifyUser()) {
-			return Service::get('app')->redirect('login');
+			return Service::get('app')->redirect('/login');
 		}
   }
 

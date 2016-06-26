@@ -29,7 +29,7 @@
 					'<div class="col-md-2">'+list[item].inner_phone +'</div>'+
 					'<div class="col-md-2">'+list[item].outer_phone +'</div>'+
 					'<div class="col-md-2">'+list[item].email +'</div>'+
-					'<div class="col-md-2"><batton class="btn phone-delete-btn" data-id="'+list[item].id+'"><span class="glyphicon glyphicon-trash"></span> Delete</batton><a href="/admin/phone/edit/'+list[item].id +'" class="btn"><span class="glyphicon glyphicon-pencil"></span> Edit</a></div>'+
+					'<div class="col-md-2"><batton class="btn btn-default phone-delete-btn" data-id="'+list[item].id+'"><span class="glyphicon glyphicon-trash"></span> Delete</batton><a href="/admin/phone/edit/'+list[item].id +'" class="btn btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edit</a></div>'+
 					'</div>'+
 					'</div>';
 				}

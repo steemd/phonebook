@@ -34,9 +34,9 @@ class Routes {
 	private function generateRoures($routes, $app) {
 		foreach ($routes as $route) {
 			$app->match($route['url'], $route['controller'])
-			->method($route['method'])
+			->method($route['method'] ? $route['method'] : 'GET')
 			->before(function() use ($route) {
-				if ($route['role'] == 'admin'){
+				if ($route['role'] == 'user'){
 					return Security::varifyRoute();
 				}
 			});
