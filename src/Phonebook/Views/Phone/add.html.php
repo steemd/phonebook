@@ -37,7 +37,7 @@
 			</div>
 			<div class="form-group">
 				<label for="InputEmail">Email</label>
-				<input type="text" name="email" class="form-control" id="InputEmail" placeholder="Email">
+				<input type="text" name="email" class="form-control" id="InputEmail" placeholder="Email" value="">
 			</div>
 			<div class="form-group">
 				<label>Catogory</label>
@@ -52,5 +52,4 @@
 		</form>
 	</div>
 </div>
-
 <script src="/www/js/script.js"></script>

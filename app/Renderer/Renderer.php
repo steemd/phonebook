@@ -12,7 +12,8 @@ class Renderer {
 		$this->path = __DIR__.'/../../src/Phonebook/Views/'.$dir.'/'.$tmpl.'.php';
 	}
 
-	public function getContent(){
+	public function getContent($data = array()){
+		extract($data);
 		ob_start();
 		include $this->path;
 		$content = ob_get_contents();

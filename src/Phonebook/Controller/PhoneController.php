@@ -17,17 +17,31 @@ class PhoneController extends RestController{
 	function renderAddAction() {
 		return $this->render('add.html');
 	}
+	
+	function renderUpdateAction($id) {
+		$phone = Phone::findById($id);
+		return $this->render('update.html', $phone['result']);
+	}
 	//REST
 	function getAction() {
-		$phones = new Phone();
-		return new Response($phones->findAll(), 200, array('Content-Type'=>'text/json'));
+		$phones = Phone::findAll();
+		$phones['massege'] = 'result find';
+		$result = json_encode($phones);
+		return new Response($result, 200, array('Content-Type'=>'text/json'));
 	}
-	
+
 	function getOneAction($id) {
-		$phone = new Phone();
-		return new Response($phone->findById($id), 200, array('Content-Type'=>'text/json'));
+		$phone = Phone::findById($id);
+		if(is_null($phone)){
+			$phone['massege'] = 'no result';
+		} else {
+			$phone['massege'] = 'result find';
+		}
+
+		$result = json_encode($phone);	
+		return new Response($result, 200, array('Content-Type'=>'text/json'));
 	}
-	
+
 	function postAction() {	
 		$phone = new Phone();
 		$phone->name = $_POST['name'];
@@ -40,8 +54,19 @@ class PhoneController extends RestController{
 		return new Response($result);
 	}
 	
-	function putAction(){
-		//
+	function putAction(Request $req, $id){
+		parse_str($req->getContent(), $put);
+		
+		$phone = new Phone();
+		$phone->id = $put['id'];
+		$phone->name = $put['name'];
+		$phone->position = $put['position'];
+		$phone->inner_phone = $put['inner_phone'];
+		$phone->outer_phone = $put['outer_phone'];
+		$phone->email = $put['email'];
+		$phone->category_id = $put['category_id'];
+		$result = $phone->save();
+		return $result;
 	}
 	
 	function deleteAction($id) {

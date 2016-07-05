@@ -27,6 +27,12 @@ return array(
 		'role' => 'user',
 	),
 	
+	'admin_phone_update' => array(
+		'url' => '/admin/phone/update/{id}',
+		'controller' => 'Phonebook\\Controller\\PhoneController::renderUpdateAction',
+		'role' => 'user',
+	),	
+	
 	'admin_phone_add' => array(
 		'url' => '/admin/phone/add',
 		'controller' => 'Phonebook\\Controller\\PhoneController::renderAddAction',
@@ -41,6 +47,13 @@ return array(
 	'get_api_v1_phones_id' => array(
 		'url' => '/api/v1/phones/{id}',
 		'controller' => 'Phonebook\\Controller\\PhoneController::getOneAction',
+	),
+	
+	'put_api_v1_phones' => array(
+		'url' => '/api/v1/phones/{id}',
+		'controller' => 'Phonebook\\Controller\\PhoneController::putAction',
+		'method' => 'PUT',
+		'role' => 'user',
 	),
 	
 	'post_api_v1_phones' => array(

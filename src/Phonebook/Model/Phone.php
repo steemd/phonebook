@@ -15,7 +15,7 @@ class Phone extends Model implements ModelInterface {
 	public $email;
 	public $category_id;
 	
-	function getTableName() {
+	static function getTableName() {
 		return 'phones';
 	}
 

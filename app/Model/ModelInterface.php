@@ -3,5 +3,5 @@
 namespace App\Model;
 
 interface ModelInterface {
-	function getTableName();
+	static function getTableName();
 }
