@@ -58,8 +58,14 @@
 			var type = type || 'POST';
 			
 			$(formEl).on('submit', function(){
-				var formData = $(this).serialize(),
-					formId = '/'+$(this).serializeArray()[0].value || '';
+				var formId,
+					formData = $(this).serialize();
+				
+				if ($(this).serializeArray()[0].name == 'id') {
+					formId = '/'+$(this).serializeArray()[0].value;
+				} else {
+					formId = '';
+				}
 					
 				$.ajax({
 					type: type,
@@ -68,7 +74,7 @@
 					dataType: 'html',
 					success: function(result) {
 						$('#result').html(result);
-						$('.information').show('slow').delay(10000).hide('slow');
+						$('.information').show('slow').delay(2000).hide('slow');
 					}
 				});
 				return false;

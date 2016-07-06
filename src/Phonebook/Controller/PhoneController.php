@@ -48,6 +48,7 @@ class PhoneController extends RestController{
 		$phone->position = $_POST['position'];
 		$phone->inner_phone = $_POST['inner_phone'];
 		$phone->outer_phone = $_POST['outer_phone'];
+		$phone->auditory = $_POST['auditory'];
 		$phone->email = $_POST['email'];
 		$phone->category_id = $_POST['category_id'];
 		$result = $phone->save();		
@@ -58,11 +59,12 @@ class PhoneController extends RestController{
 		parse_str($req->getContent(), $put);
 		
 		$phone = new Phone();
-		$phone->id = $put['id'];
+		$phone->id = $id;
 		$phone->name = $put['name'];
 		$phone->position = $put['position'];
 		$phone->inner_phone = $put['inner_phone'];
 		$phone->outer_phone = $put['outer_phone'];
+		$phone->auditory = $put['auditory'];
 		$phone->email = $put['email'];
 		$phone->category_id = $put['category_id'];
 		$result = $phone->save();

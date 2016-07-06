@@ -53,23 +53,16 @@ class Model {
 		$vars = get_object_vars($this);
 		$varsData = array();
 		$queryString = $this->getQueryString($vars, $tableName);
-
-		if(!empty($vars['id'])){
-			
-			
-			return $queryString;
-		} else {	
-
-			$stmt = Model::getPDO()->prepare($queryString);
-
-			foreach ($vars as $key=>$val) {
-				$varsData[':'.$key] = $val ? $val : '';
-			}
-			if ($stmt->execute($varsData)) {
-				return 'information saved';
-			}
+		
+		$stmt = Model::getPDO()->prepare($queryString);
+		
+		foreach ($vars as $key=>$val) {
+			$varsData[':'.$key] = $val ? $val : '';
 		}
-			return 'Error :(';
+		if ($stmt->execute($varsData)) {
+			return 'information saved';
+		}
+		return 'Error :(';
 	}
 	
 	
