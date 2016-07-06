@@ -4,6 +4,7 @@
 			<div class="col-md-6">
 				<a href="/" class="btn btn-primary"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Phonebook</a> - 
 				<a href="/admin" class="btn btn-primary">Admin Panel</a> - 
+				<a href="/admin/phone/list" class="btn btn-primary">Phone list</a> - 
 				<b>Update Phone</b>
 			</div>
 			<div class="col-md-6">

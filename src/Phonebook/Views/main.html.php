@@ -12,5 +12,10 @@
 </head>
 <body>
 	<?php echo $content; ?>
+	<div class="container">
+		<div class="row text-center">
+		All Rights Reserved by <a href="#">sumdu.edu.ua</a>
+		</div>
+	</div>
 </body>
 </html>

@@ -27,8 +27,8 @@
 			<div class="col-md-4">
 				<h4><span class="glyphicon glyphicon-th-list"></span> Categories manager:</h4>
 				<div class="list-group">
-					<a href="#" class="list-group-item">Show category list <span class="pull-right glyphicon glyphicon-chevron-right"></span></a>
-					<a href="#" class="list-group-item">Add new category <span class="pull-right glyphicon glyphicon-chevron-right"></span></a>
+					<a href="/admin/category/list" class="list-group-item">Show category list <span class="pull-right glyphicon glyphicon-chevron-right"></span></a>
+					<a href="/admin/category/add" class="list-group-item">Add new category <span class="pull-right glyphicon glyphicon-chevron-right"></span></a>
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -41,5 +41,3 @@
 		</div>
 	</div>
 </div>
-
-<script src="/www/js/script.js"></script>

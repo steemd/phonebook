@@ -57,12 +57,12 @@ class Model {
 		$stmt = Model::getPDO()->prepare($queryString);
 		
 		foreach ($vars as $key=>$val) {
-			$varsData[':'.$key] = $val ? $val : '';
+			$varsData[':'.$key] = ($val || $val === '0') ? $val : '';
 		}
 		if ($stmt->execute($varsData)) {
 			return 'information saved';
 		}
-		return 'Error :(';
+		return 'Error :('; 
 	}
 	
 	
