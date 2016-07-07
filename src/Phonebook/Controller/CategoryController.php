@@ -15,12 +15,14 @@ class CategoryController extends RestController{
 	}
 	
 	function renderAddAction() {
-		return $this->render('add.html');
+		$categories = Category::findAll();
+		return $this->render('add.html', array('categories' => $categories['result']));
 	}
 	
 	function renderUpdateAction($id) {
-		$phone = Phone::findById($id);
-		return $this->render('update.html', $phone['result']);
+		$category = Category::findById($id);
+		$categories = Category::findAll();
+		return $this->render('update.html', array('category' => $category['result'], 'categories' => $categories['result']));
 	}
 	//REST
 	function getAction() {
@@ -51,18 +53,14 @@ class CategoryController extends RestController{
 	}
 	
 	function putAction(Request $req, $id){
-/* 		parse_str($req->getContent(), $put);		
-		$phone = new Phone();
-		$phone->id = $id;
-		$phone->name = $put['name'];
-		$phone->position = $put['position'];
-		$phone->inner_phone = $put['inner_phone'];
-		$phone->outer_phone = $put['outer_phone'];
-		$phone->auditory = $put['auditory'];
-		$phone->email = $put['email'];
-		$phone->category_id = $put['category_id'];
-		$result = $phone->save();
-		return $result; */
+ 		parse_str($req->getContent(), $put);
+		
+		$category = new Category();
+		$category->id = $id;
+		$category->name = $put['name'];
+		$category->parent_id = $put['category_id'];
+		$result = $category->save();
+		return $result; 
 	}
 	
 	function deleteAction($id) {

@@ -47,6 +47,11 @@ return array(
 		'controller' => 'Phonebook\\Controller\\CategoryController::renderAddAction',
 		'role' => 'user',
 	),
+	'admin_category_update' => array(
+		'url' => '/admin/category/update/{id}',
+		'controller' => 'Phonebook\\Controller\\CategoryController::renderUpdateAction',
+		'role' => 'user',
+	),	
 	
 	// REST API
 	'get_api_v1_categories' => array(
@@ -61,6 +66,12 @@ return array(
 		'url' => '/api/v1/categories',
 		'controller' => 'Phonebook\\Controller\\CategoryController::postAction',
 		'method' => 'POST',
+		'role' => 'user',
+	),
+	'put_api_v1_categories' => array(
+		'url' => '/api/v1/categories/{id}',
+		'controller' => 'Phonebook\\Controller\\CategoryController::putAction',
+		'method' => 'PUT',
 		'role' => 'user',
 	),
 	'delete_api_v1_categories' => array(

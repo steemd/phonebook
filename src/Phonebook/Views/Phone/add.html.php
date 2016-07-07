@@ -42,9 +42,11 @@
 			<div class="form-group">
 				<label>Catogory</label>
 				<select name="category_id" class="form-control">
-					<option value="1">Category Name One</option>
-					<option value="2">Category Name Two</option>
-					<option value="3">Category Name Three</option>
+					<?php
+						foreach($categories as $val){
+						echo '<option value="'.$val['id'].'">'.$val['name'].'</option>';
+						}
+					?>
 				</select>
 			</div>
 

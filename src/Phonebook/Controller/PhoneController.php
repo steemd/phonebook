@@ -5,6 +5,7 @@ namespace Phonebook\Controller;
 use App\App;
 use App\Controller\Controller;
 use Phonebook\Model\Phone;
+use Phonebook\Model\Category;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,12 +16,14 @@ class PhoneController extends RestController{
 	}
 	
 	function renderAddAction() {
-		return $this->render('add.html');
+		$categories = Category::findAll();
+		return $this->render('add.html', array('categories' => $categories['result']));
 	}
 	
 	function renderUpdateAction($id) {
 		$phone = Phone::findById($id);
-		return $this->render('update.html', $phone['result']);
+		$categories = Category::findAll();
+		return $this->render('update.html', array('phone' => $phone['result'], 'categories' => $categories['result']));
 	}
 	//REST
 	function getAction() {

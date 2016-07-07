@@ -226,6 +226,7 @@
 		submitData('#create-phone', '/api/v1/phones', 'POST');
 		submitData('#update-phone', '/api/v1/phones', 'PUT');
 		submitData('#create-category', '/api/v1/categories', 'POST');
+		submitData('#update-category', '/api/v1/categories', 'PUT');
 
 		
 	});
