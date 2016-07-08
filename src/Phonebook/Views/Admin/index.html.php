@@ -34,8 +34,8 @@
 			<div class="col-md-4">
 				<h4><span class="glyphicon glyphicon-file"></span> Pages manager:</h4>
 				<div class="list-group">
-					<a href="#" class="list-group-item">Show page list <span class="pull-right glyphicon glyphicon-chevron-right"></span></a>
-					<a href="#" class="list-group-item">Add new page <span class="pull-right glyphicon glyphicon-chevron-right"></span></a>
+					<a href="/admin/page/list" class="list-group-item">Show page list <span class="pull-right glyphicon glyphicon-chevron-right"></span></a>
+					<a href="/admin/page/add" class="list-group-item">Add new page <span class="pull-right glyphicon glyphicon-chevron-right"></span></a>
 				</div>
 			</div>
 		</div>

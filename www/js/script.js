@@ -70,6 +70,37 @@
 			return result;
 		}
 		
+		
+		function renderPageList(data, type) {
+			var list = data.result,
+					type = type || 'site',
+					result = '';
+					
+			if (type == 'site') {
+				for (var item in list) {
+					result += '<div class="item aniamtion">'+
+					'<div class="row">'+
+					'<div class="col-md-1">'+list[item].id +'</div>'+
+					'<div class="col-md-9 name-item">'+list[item].name +'</div>'+
+					'<div class="col-md-2 parent-id-item">'+list[item].parent_id +'</div>'+
+					'</div>'+
+					'</div>';
+				}
+			} else if (type == 'admin') {
+				for (var item in list) {
+					result += '<div class="item aniamtion">'+
+					'<div class="row">'+
+					'<div class="col-md-1">'+list[item].id +'</div>'+
+					'<div class="col-md-9 title-item">'+list[item].title +'</div>'+
+					'<div class="col-md-2"><batton class="btn btn-default page-delete-btn" data-id="'+list[item].id+'"><span class="glyphicon glyphicon-trash"></span> Delete</batton><a href="/admin/page/update/'+list[item].id +'" class="btn btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Edit</a></div>'+
+					'</div>'+
+					'</div>';
+				}
+			}
+			
+			return result;
+		}
+		
 		function searchForm(formEl, searchEl) {	
 			$(formEl).on('keyup', function(obj){
 				var searchText = this.value.toLowerCase();
@@ -184,6 +215,39 @@
 			});
 			
 		}
+		
+		function deletePage(btn){			
+			$(btn).on('click', function(){
+				var id = this.getAttribute('data-id');
+				
+				if(confirm('You realy delete '+ id +' element')){
+					$.ajax({
+						type: 'DELETE',
+						url: '/api/v1/pages/'+id,
+						dataType: 'html',
+						success: function(result) {
+							$('#response').html(result);
+							$('.information').show('slow').delay(2000).hide('slow');
+						}
+					});
+					
+					$.ajax({
+						type: 'GET',
+						url: '/api/v1/pages',
+						dataType: 'json',
+						success: function(data){
+							$('#page-list-result').html(renderPageList(data, 'admin'));
+							deletePage('.page-delete-btn');
+						},
+						error: function() {
+							console.log('Error result');
+						}
+					});
+				}
+				
+			});
+			
+		}
 			
 		$(window).on('load', function(){
 			$('#search-name').val('');
@@ -215,6 +279,19 @@
 				}
 			});
 			
+			$.ajax({
+				type: 'GET',
+				url: '/api/v1/pages',
+				dataType: 'json',
+				success: function(data){
+					$('#page-list-result').html(renderPageList(data, 'admin'));
+					deletePage('.page-delete-btn');
+				},
+				error: function() {
+					console.log('Error result');
+				}
+			});
+			
 		});
 
 		toggleInfo('.search-btn', '.search-block');
@@ -227,6 +304,8 @@
 		submitData('#update-phone', '/api/v1/phones', 'PUT');
 		submitData('#create-category', '/api/v1/categories', 'POST');
 		submitData('#update-category', '/api/v1/categories', 'PUT');
+		submitData('#create-page', '/api/v1/pages', 'POST');
+		submitData('#update-page', '/api/v1/pages', 'PUT');
 
 		
 	});

@@ -17,5 +17,3 @@
 		<div id="list-result"></div>
 	</div>	
 </div>
-
-<script src="/www/js/script.js"></script>

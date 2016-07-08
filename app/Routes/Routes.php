@@ -6,6 +6,7 @@ use App\Model\Model;
 use App\Renderer\Renderer;
 use Phonebook\Model\Phone;
 use App\Security\Security;
+use App\DI\Service;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,7 +17,7 @@ class Routes {
 
 	public function load($app){
 
-		$this->generateRoures(include __DIR__.'/../../config/routes.php', $app);
+		$this->generateRoures(Service::get('config')['routes'], $app);
 		
 		// Error Page
 		$app->error(function (\Exception $e, $code) {

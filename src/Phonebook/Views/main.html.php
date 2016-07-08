@@ -13,9 +13,11 @@
 <body>
 	<?php echo $content; ?>
 	<div class="container">
-		<div class="row text-center">
+		<div class="row text-center" style="padding-top: 20px;">
 		All Rights Reserved by <a href="#">sumdu.edu.ua</a>
 		</div>
 	</div>
+	
+	<script src="/www/js/script.js"></script>
 </body>
 </html>

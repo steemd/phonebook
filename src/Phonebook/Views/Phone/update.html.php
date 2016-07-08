@@ -61,4 +61,3 @@
 		</form>
 	</div>
 </div>
-<script src="/www/js/script.js"></script>

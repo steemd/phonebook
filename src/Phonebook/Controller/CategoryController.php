@@ -60,7 +60,7 @@ class CategoryController extends RestController{
 		$category->name = $put['name'];
 		$category->parent_id = $put['category_id'];
 		$result = $category->save();
-		return $result; 
+		return new Response($result); 
 	}
 	
 	function deleteAction($id) {
